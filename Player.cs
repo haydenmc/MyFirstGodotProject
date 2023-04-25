@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, IControllable
 {
     public const float Speed = 10.0f;
     public const float JumpVelocity = 10.0f;
     public const float CameraXSensitivity = 0.005f;
     public const float CameraYSensitivity = 0.005f;
+
+    private Vector2 _movementDirection;
 
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -15,21 +17,11 @@ public partial class Player : CharacterBody3D
     
     public override void _Ready()
     {
-        Input.MouseMode = Input.MouseModeEnum.Captured;
         _camera = GetNode<Camera3D>("Camera3D");
     }
 
     public override void _Input(InputEvent @event)
-    {
-        if (@event is InputEventMouseMotion)
-        {
-            var moveEvent = @event as InputEventMouseMotion;
-            RotateY(-moveEvent.Relative.X * CameraXSensitivity);
-            _camera.RotateX(-moveEvent.Relative.Y * CameraYSensitivity);
-            _camera.Rotation = _camera.Rotation with {
-                X = Mathf.Clamp(_camera.Rotation.X, -Mathf.Pi/2.0f, Mathf.Pi/2.0f) };
-        }
-    }
+    { }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -39,14 +31,9 @@ public partial class Player : CharacterBody3D
         if (!IsOnFloor())
             velocity.Y -= gravity * (float)delta;
 
-        // Handle Jump.
-        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-            velocity.Y = JumpVelocity;
-
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
-        Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward",
-        "move_backward");
+        Vector2 inputDir = _movementDirection;
         Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y))
             .Normalized();
         if (direction != Vector3.Zero)
@@ -62,5 +49,31 @@ public partial class Player : CharacterBody3D
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    public void SetMovement(Vector2 direction)
+    {
+        _movementDirection = direction;
+    }
+
+    public void RotateAim(Vector2 delta)
+    {
+        RotateY(-delta.X * CameraXSensitivity);
+        _camera.RotateX(-delta.Y * CameraYSensitivity);
+        _camera.Rotation = _camera.Rotation with {
+            X = Mathf.Clamp(_camera.Rotation.X, -Mathf.Pi/2.0f, Mathf.Pi/2.0f) };
+    }
+
+    public void Jump()
+    {
+        if (IsOnFloor())
+        {
+            Velocity = Velocity with { Y = JumpVelocity };
+        }
+    }
+
+    public void Fire()
+    {
+        throw new NotImplementedException();
     }
 }
