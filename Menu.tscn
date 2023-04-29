@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnryt6mia65ku"]
+
+[ext_resource type="Script" path="res://Menu.cs" id="1_yo885"]
+
+[node name="Menu" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yo885")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="CenterContainer/HFlowContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="VFlowContainer" type="VFlowContainer" parent="CenterContainer/HFlowContainer"]
+layout_mode = 2
+
+[node name="ConnectIpEntry" type="LineEdit" parent="CenterContainer/HFlowContainer/VFlowContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "Hostname"
+
+[node name="ConnectPortEntry" type="LineEdit" parent="CenterContainer/HFlowContainer/VFlowContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "7890"
+placeholder_text = "Port"
+
+[node name="ConnectButton" type="Button" parent="CenterContainer/HFlowContainer/VFlowContainer"]
+layout_mode = 2
+text = "Connect"
