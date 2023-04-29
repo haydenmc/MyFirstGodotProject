@@ -1,3 +1,5 @@
+namespace MyFirstGodotProject;
+
 public partial class Menu : Control
 {
     private Button _hostButton;

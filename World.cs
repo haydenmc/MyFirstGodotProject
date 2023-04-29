@@ -1,3 +1,5 @@
+namespace MyFirstGodotProject;
+
 public partial class World : Node
 {
     private Camera3D _serverCamera;

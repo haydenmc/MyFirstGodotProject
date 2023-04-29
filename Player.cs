@@ -1,3 +1,5 @@
+namespace MyFirstGodotProject;
+
 public partial class Player : CharacterBody3D, IControllable
 {
     public const float Speed = 10.0f;

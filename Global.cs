@@ -1,6 +1,8 @@
 global using Godot;
 global using System;
 
+namespace MyFirstGodotProject;
+
 public partial class Global : Node
 {
     public enum ClientModeKind

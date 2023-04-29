@@ -1,3 +1,5 @@
+namespace MyFirstGodotProject;
+
 public partial class PlayerController : Node
 {
     [Export]

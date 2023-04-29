@@ -1,3 +1,5 @@
+namespace MyFirstGodotProject;
+
 public interface IControllable
 {
     public void SetMovement(Vector2 direction);
