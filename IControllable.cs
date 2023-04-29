@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public interface IControllable
 {
     public void SetMovement(Vector2 direction);

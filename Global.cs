@@ -1,5 +1,5 @@
-using Godot;
-using System;
+global using Godot;
+global using System;
 
 public partial class Global : Node
 {
