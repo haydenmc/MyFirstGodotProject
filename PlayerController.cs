@@ -28,12 +28,13 @@ public partial class PlayerController : Node
 
     public override void _Process(double delta)
     {
-        Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward",
+        Vector2 inputDir = Input.GetVector(
+            "move_left", 
+            "move_right", 
+            "move_forward",
             "move_backward");
-        if (_target != null)
-        {
-            _target.SetMovement(inputDir);
-        }
+
+        _target?.SetMovement(inputDir);
     }
 
     public override void _Input(InputEvent @event)

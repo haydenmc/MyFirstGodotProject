@@ -41,6 +41,7 @@ public partial class World : Node
     private int GetPort()
     {
         int port = Global.DEFAULT_PORT;
+
         try
         {
             port = int.Parse(Global.ConnectPort);
@@ -49,6 +50,7 @@ public partial class World : Node
         {
             GD.PrintErr($"Could not parse port value '{Global.ConnectPort}', defaulting to {port}");
         }
+
         return port;
     }
 
@@ -70,12 +72,14 @@ public partial class World : Node
     private void StartClient()
     {
         int port = GetPort();
+
         Error err = _multiplayerPeer.CreateClient(Global.ConnectHostname, port);
         if (err != Error.Ok)
         {
             throw new ApplicationException(
                 $"Could not join server at '{Global.ConnectHostname}' port {port}: {err}");
         }
+
         Multiplayer.MultiplayerPeer = _multiplayerPeer;
         GD.Print($"✅ Connected to '{Global.ConnectHostname}' on port {port}!");
     }
