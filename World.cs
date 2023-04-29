@@ -40,7 +40,7 @@ public partial class World : Node
 
     private int GetPort()
     {
-        int port = Global.DEFAULT_PORT;
+        var port = Global.DEFAULT_PORT;
 
         try
         {
@@ -56,12 +56,11 @@ public partial class World : Node
 
     private void StartServer()
     {
-        int port = GetPort();
-        Error err = _multiplayerPeer.CreateServer(port);
+        var port = GetPort();
+        var err = _multiplayerPeer.CreateServer(port);
         if (err != Error.Ok)
-        {
             throw new ApplicationException($"Could not start server on port {port}: {err}");
-        }
+
         _multiplayerPeer.PeerConnected += OnServerPeerConnected;
         _multiplayerPeer.PeerDisconnected += OnServerPeerDisconnected;
         Multiplayer.MultiplayerPeer = _multiplayerPeer;
@@ -71,14 +70,12 @@ public partial class World : Node
 
     private void StartClient()
     {
-        int port = GetPort();
+        var port = GetPort();
 
-        Error err = _multiplayerPeer.CreateClient(Global.ConnectHostname, port);
+        var err = _multiplayerPeer.CreateClient(Global.ConnectHostname, port);
         if (err != Error.Ok)
-        {
             throw new ApplicationException(
                 $"Could not join server at '{Global.ConnectHostname}' port {port}: {err}");
-        }
 
         Multiplayer.MultiplayerPeer = _multiplayerPeer;
         GD.Print($"✅ Connected to '{Global.ConnectHostname}' on port {port}!");
