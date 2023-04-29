@@ -1,5 +1,4 @@
-using Godot;
-using System;
+namespace MyFirstGodotProject;
 
 public partial class Menu : Control
 {

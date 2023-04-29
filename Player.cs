@@ -1,5 +1,4 @@
-using Godot;
-using System;
+namespace MyFirstGodotProject;
 
 public partial class Player : CharacterBody3D, IControllable
 {
@@ -25,7 +24,7 @@ public partial class Player : CharacterBody3D, IControllable
 
     public override void _PhysicsProcess(double delta)
     {
-        Vector3 velocity = Velocity;
+        var velocity = Velocity;
 
         // Add the gravity.
         if (!IsOnFloor())
@@ -33,8 +32,8 @@ public partial class Player : CharacterBody3D, IControllable
 
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
-        Vector2 inputDir = _movementDirection;
-        Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y))
+        var inputDir = _movementDirection;
+        var direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y))
             .Normalized();
         if (direction != Vector3.Zero)
         {
