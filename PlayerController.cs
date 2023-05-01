@@ -42,7 +42,7 @@ public partial class PlayerController : Node
         if (@event is InputEventMouseMotion)
         {
             var moveEvent = @event as InputEventMouseMotion;
-            _target.RotateAim(moveEvent.Relative);
+            _target?.RotateAim(moveEvent.Relative);
         }
         else
         {
