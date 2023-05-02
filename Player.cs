@@ -51,6 +51,18 @@ public partial class Player : CharacterBody3D, IControllable
         MoveAndSlide();
     }
 
+    public void SetCamera(bool isCurrent)
+    {
+        if (isCurrent)
+        {
+            _camera.MakeCurrent();
+        }
+        else
+        {
+            _camera.ClearCurrent(false);
+        }
+    }
+
     public void SetMovement(Vector2 direction)
     {
         _movementDirection = direction;
@@ -74,6 +86,6 @@ public partial class Player : CharacterBody3D, IControllable
 
     public void Fire()
     {
-        throw new NotImplementedException();
+        ;
     }
 }

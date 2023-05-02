@@ -14,9 +14,27 @@ public partial class PlayerController : Node
         {
             if (value is IControllable)
             {
+                if (_target != null)
+                {
+                    _target.SetCamera(false);
+                }
                 _target = value as IControllable;
+                _target.SetCamera(true);
+                Input.MouseMode = Input.MouseModeEnum.Captured;
             }
-            throw new Exception("PlayerController target must be an IControllable");
+            else if (value == null)
+            {
+                if (_target != null)
+                {
+                    _target.SetCamera(false);
+                    _target = null;
+                    Input.MouseMode = Input.MouseModeEnum.Visible;
+                }
+            }
+            else
+            {
+                throw new Exception("PlayerController target must be an IControllable");
+            }
         }
     }
     
@@ -24,7 +42,10 @@ public partial class PlayerController : Node
     
     public override void _Ready()
     {
-        Input.MouseMode = Input.MouseModeEnum.Captured;
+        if (_target != null)
+        {
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
     }
 
     public override void _Process(double delta)
